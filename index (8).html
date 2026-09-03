@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarek Nadhir Khoucha — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F5F0;
+    --surface: #FFFFFF;
+    --surface-2: #EFEEE7;
+    --ink: #20241F;
+    --ink-soft: #5B6158;
+    --ink-faint: #8A8F84;
+    --accent: #2F5D50;
+    --accent-strong: #1F4238;
+    --accent-soft: #E1EAE4;
+    --accent-contrast: #F7FAF8;
+    --border: #DEDCD2;
+    --shadow: 0 1px 2px rgba(32, 36, 31, 0.06);
+    --radius: 3px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141713;
+      --surface: #1B1F1A;
+      --surface-2: #22271F;
+      --ink: #E9E7DD;
+      --ink-soft: #A5AA9C;
+      --ink-faint: #6F756A;
+      --accent: #7FB59C;
+      --accent-strong: #9DCBB4;
+      --accent-soft: #223129;
+      --accent-contrast: #10140F;
+      --border: #2B302A;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #141713;
+    --surface: #1B1F1A;
+    --surface-2: #22271F;
+    --ink: #E9E7DD;
+    --ink-soft: #A5AA9C;
+    --ink-faint: #6F756A;
+    --accent: #7FB59C;
+    --accent-strong: #9DCBB4;
+    --accent-soft: #223129;
+    --accent-contrast: #10140F;
+    --border: #2B302A;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Karla', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  a { color: inherit; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .page-wrap {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 3rem 2.25rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  .sidebar-id h1 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
+  }
+
+  .sidebar-id .role {
+    font-size: 0.98rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .sidebar-id .location {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .sidebar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .sidebar nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    padding: 0.4rem 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease;
+  }
+
+  .sidebar nav a::before {
+    content: "";
+    width: 12px;
+    height: 1px;
+    background: var(--ink-faint);
+    display: inline-block;
+    transition: width 0.15s ease, background 0.15s ease;
+  }
+
+  .sidebar nav a:hover,
+  .sidebar nav a:focus-visible {
+    color: var(--ink);
+  }
+
+  .sidebar nav a:hover::before,
+  .sidebar nav a:focus-visible::before {
+    width: 20px;
+    background: var(--accent);
+  }
+
+  .sidebar-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    font-size: 0.85rem;
+  }
+
+  .sidebar-contact a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    word-break: break-word;
+  }
+
+  .sidebar-contact a:hover,
+  .sidebar-contact a:focus-visible {
+    color: var(--accent);
+  }
+
+  .btn-cv {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    margin-top: auto;
+    transition: background 0.15s ease;
+  }
+
+  .btn-cv:hover,
+  .btn-cv:focus-visible {
+    background: var(--accent-strong);
+  }
+
+  main {
+    padding: 3rem 3rem 5rem;
+    max-width: 900px;
+  }
+
+  section {
+    padding: 3rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  section h2 {
+    font-size: 1.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-intro {
+    max-width: 62ch;
+    color: var(--ink-soft);
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0 0 0 1.75rem;
+    border-left: 2px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  .timeline-item {
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -2.28rem;
+    top: 0.35rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+  }
+
+  .timeline-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-head h3 {
+    font-size: 1.1rem;
+  }
+
+  .timeline-head .dates {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .timeline-org {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .timeline-org .sep {
+    color: var(--ink-faint);
+    font-weight: 400;
+    margin: 0 0.4rem;
+  }
+
+  .timeline-item ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.02rem;
+  }
+
+  .project-card .dates {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+  }
+
+  .project-card p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+  }
+
+  .project-card ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--ink-soft);
+    font-size: 0.86rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .skills-group h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-faint);
+    margin-bottom: 0.9rem;
+  }
+
+  .skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius);
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.75rem;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.7rem 1.1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .contact-btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  .contact-btn.primary:hover,
+  .contact-btn.primary:focus-visible {
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+  }
+
+  .contact-btn:not(.primary):hover,
+  .contact-btn:not(.primary):focus-visible {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  footer {
+    padding: 2rem 3rem 3rem;
+    color: var(--ink-faint);
+    font-size: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .page-wrap {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: relative;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 2.25rem 1.5rem;
+    }
+
+    .sidebar nav {
+      display: none;
+    }
+
+    main {
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    footer {
+      padding: 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <aside class="sidebar">
+    <div class="sidebar-id">
+      <h1>Tarek Nadhir Khoucha</h1>
+      <div class="role">Ingénieur en génie de la production automatisée</div>
+      <div class="location">Laval, Québec</div>
+    </div>
+
+    <nav aria-label="Navigation du portfolio">
+      <ul>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#experience">Expérience</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#formation">Formation</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-contact">
+      <a href="mailto:khoucha.tareknadhir@gmail.com">khoucha.tareknadhir@gmail.com</a>
+      <a href="tel:+14505172949">(450) 517-2949</a>
+      <a href="https://www.linkedin.com/in/tarek-khoucha-eng-génie-production" target="_blank" rel="noopener">linkedin.com/in/tarek-khoucha-eng-génie-production</a>
+    </div>
+
+    <a class="btn-cv" href="#contact">Me contacter →</a>
+  </aside>
+
+  <main>
+
+    <section id="apropos">
+      <span class="eyebrow">À propos</span>
+      <h2>Qui je suis</h2>
+      <p class="section-intro">
+        Je suis finissant en génie de la production automatisée à l'ÉTS, spécialisé en gestion de la chaîne
+        d'approvisionnement, optimisation des processus et amélioration de la performance opérationnelle. Mon
+        parcours académique et professionnel m'a permis de développer une expérience en planification des stocks,
+        gestion des approvisionnements, optimisation des coûts logistiques et analyse des flux dans des
+        environnements industriels complexes.
+      </p>
+      <p class="section-intro">
+        J'ai également acquis une expérience en systèmes automatisés (PLC, SCADA, DCS), analyse de données,
+        optimisation des procédés et amélioration continue. Je maîtrise des outils de modélisation et d'analyse
+        tels que GAMS, Python, SAP S/4HANA, ERPsim, ainsi que des technologies d'automatisation Siemens (TIA
+        Portal, Step 7). Passionné par l'optimisation des opérations industrielles et la transformation numérique.
+      </p>
+    </section>
+
+    <section id="experience">
+      <span class="eyebrow">Parcours</span>
+      <h2>Expérience professionnelle</h2>
+
+      <ul class="timeline">
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3>Stagiaire — Amélioration d'un système d'inspection ferroviaire</h3>
+            <span class="dates">Janv. 2026 – Mai 2026</span>
+          </div>
+          <div class="timeline-org">Centre d'expertise ferroviaire RAIL<span class="sep">·</span>Sept-Îles, Canada</div>
+          <ul>
+            <li>Analyse des besoins et recherche de solutions techniques adaptées.</li>
+            <li>Intégration et mise en service de nouveaux équipements.</li>
+            <li>Développement et amélioration de solutions techniques et logicielles.</li>
+            <li>Réalisation de tests, validation des performances et documentation des travaux.</li>
+          </ul>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3>Superviseur</h3>
+            <span class="dates">Fév. 2025 – Déc. 2025</span>
+          </div>
+          <div class="timeline-org">Le PRO<span class="sep">·</span>Montréal, Canada</div>
+          <ul>
+            <li>Supervision et coordination des activités quotidiennes du magasin.</li>
+            <li>Encadrement, formation et accompagnement des employés dans leurs tâches.</li>
+            <li>Gestion des stocks : réception, contrôle des inventaires, réapprovisionnement.</li>
+            <li>Suivi des indicateurs de performance (ventes, disponibilité, satisfaction client).</li>
+          </ul>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3>Superviseure</h3>
+            <span class="dates">Mai 2024 – Janv. 2025</span>
+          </div>
+          <div class="timeline-org">Vista Vitres<span class="sep">·</span>Laval, Canada</div>
+          <ul>
+            <li>Tri et organisation des produits en entrepôt selon les commandes.</li>
+            <li>Réception et vérification des marchandises, signalement des écarts.</li>
+            <li>Préparation des commandes : prélèvement, emballage, étiquetage, palettisation.</li>
+            <li>Maintien de l'ordre et application des règles de santé et sécurité (SST).</li>
+          </ul>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3>Superviseure de production</h3>
+            <span class="dates">Sept. 2023 – Janv. 2024</span>
+          </div>
+          <div class="timeline-org">Usine de matelas<span class="sep">·</span>Skikda, Algérie</div>
+          <ul>
+            <li>Supervision des machines de production pour un fonctionnement continu et efficace.</li>
+            <li>Coordination du travail des opérateurs afin d'assurer qualité et productivité.</li>
+            <li>Analyse des KPI de production (taux de rendement) pour identifier des axes d'amélioration.</li>
+          </ul>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3>Stagiaire — Production de PEHD</h3>
+            <span class="dates">Janv. 2023 – Avril 2023</span>
+          </div>
+          <div class="timeline-org">Complexe CP2K — Production de PEHD, Industrie GNL<span class="sep">·</span>Algérie</div>
+          <ul>
+            <li>Participation à la gestion des flux logistiques des matières premières utilisées dans la production du PEHD.</li>
+            <li>Surveillance technique : participation à des visites techniques dans des salles de contrôle utilisant DCS pour l'apprentissage et la surveillance des processus automatisés.</li>
+            <li>Planification des approvisionnements en éthylène et autres additifs essentiels.</li>
+            <li>Participation aux démarrages et arrêts d'unités en suivant des procédures précises.</li>
+            <li>Assistance au personnel de production, maintien de l'opérabilité des lignes et entretien des outils.</li>
+          </ul>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3>Stagiaire — Liquéfaction du gaz naturel</h3>
+            <span class="dates">Août 2022 – Nov. 2022</span>
+          </div>
+          <div class="timeline-org">Complexe GL1K, Industrie GNL<span class="sep">·</span>Algérie</div>
+          <ul>
+            <li>Optimisation des stocks de GNL en analysant les besoins, les cycles de production et les prévisions d'exportation.</li>
+            <li>Suivi de l'approvisionnement en gaz naturel pour garantir un débit optimal.</li>
+            <li>Réception et transmission des rapports d'intervention terrain.</li>
+            <li>Conduite de rondes d'inspection pour vérifier vibration, température, pression, débit et données.</li>
+            <li>Contrôle à distance des équipements (vannes, pompes, compresseurs, générateurs, fours).</li>
+          </ul>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3>Stagiaire — Raffinerie de Skikda</h3>
+            <span class="dates">Juin 2021 – Sept. 2021</span>
+          </div>
+          <div class="timeline-org">Industrie pétrolière<span class="sep">·</span>Skikda, Algérie</div>
+          <ul>
+            <li>Assistance à la supervision des tours de distillation automatisées via les systèmes SCADA.</li>
+            <li>Ajustement des consignes de fonctionnement pour optimiser la production et maintenir la stabilité du procédé.</li>
+            <li>Rédaction de rapports techniques sur la performance et les incidents.</li>
+            <li>Signalement de toute anomalie pouvant affecter le rendement des unités de production.</li>
+            <li>Vérification des capteurs de pression et de température selon les procédures standards, pour identifier les éventuels dysfonctionnements.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section id="projets">
+      <span class="eyebrow">Projets d'études</span>
+      <h2>Projets</h2>
+
+      <div class="project-grid">
+        <article class="project-card">
+          <h3>Optimisation d'un réseau logistique multimodal pour les matières résiduelles</h3>
+          <div class="dates">Avril 2025 – Mai 2026 · École de technologie supérieure</div>
+          <p>Projet d'études sur l'optimisation d'un réseau multimodal des matières résiduelles (Québec).</p>
+          <ul>
+            <li>Collecter et normaliser les données par municipalité/MRC puis importer dans Supply Chain Guru.</li>
+            <li>Modéliser la demande par ajustements statistiques.</li>
+            <li>Modéliser une optimisation bi-objectif (coût et GES) des modes et quantités expédiées.</li>
+            <li>Utiliser Supply Chain Guru pour simuler des scénarios multimodaux.</li>
+            <li>Comparer les scénarios Base, Multimodal déterministe et Multimodal stochastique, et analyser la sensibilité aux prix, à la taxe carbone et aux subventions fluviales.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Supply Chain Guru</span>
+            <span class="tag">Optimisation bi-objectif</span>
+            <span class="tag">Modélisation statistique</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3>Optimisation des flux logistiques et gestion des approvisionnements</h3>
+          <div class="dates">Janvier 2025 – Avril 2025 · Cours ENM850, École de technologie supérieure</div>
+          <p>Dans le cadre du cours ENM850 – Chaîne d'approvisionnement et transformation numérique, développement
+            de compétences en gestion des flux logistiques et en optimisation des ressources avec SAP S/4HANA et
+            ERPsim.</p>
+          <ul>
+            <li>Participer à une simulation de gestion d'entreprise intégrée en appliquant des stratégies Push &amp; Pull pour optimiser la gestion des stocks et des approvisionnements.</li>
+            <li>Travailler sur la planification et l'optimisation des flux logistiques via SAP S/4HANA et ERPsim.</li>
+            <li>Mettre en œuvre des stratégies de réapprovisionnement et d'allocation des ressources.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">SAP ERP</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">ERPsim</span>
+            <span class="tag">Gestion des approvisionnements</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3>Optimisation logistique et prise de décision durable</h3>
+          <div class="dates">Septembre 2024 – Décembre 2024 · Cours SYS872, École de technologie supérieure</div>
+          <p>Dans le cadre du cours SYS872 – Systèmes logistiques durables, développement de compétences en
+            optimisation des flux logistiques et en analyse décisionnelle multicritère.</p>
+          <ul>
+            <li>Réaliser plusieurs études de cas appliquées de modèles d'optimisation sous GAMS et de méthodes de prise de décision avec Super Decision (AHP).</li>
+            <li>Modéliser et optimiser l'expansion d'un réseau logistique sous contraintes budgétaires en développant un modèle mathématique sous GAMS pour déterminer l'implantation optimale d'entrepôts et l'affectation des clients.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">GAMS</span>
+            <span class="tag">Super Decision</span>
+            <span class="tag">AHP</span>
+            <span class="tag">Logistique durable</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3>Commande cascade robuste via le réseau des turbines à gaz sous contraintes de communication et perturbations externes</h3>
+          <div class="dates">Décembre 2022 – Juillet 2023 · Université 20 Août 1955, Skikda</div>
+          <ul>
+            <li>Optimiser la stabilité et les performances des turbines sous contraintes.</li>
+            <li>Analyser les conditions de stabilité et les perturbations externes à l'aide de la technique H∞ et des inégalités matricielles linéaires (LMI).</li>
+            <li>Simuler numériquement pour évaluer la robustesse du modèle en conditions réelles avec la turbine industrielle V94.2.</li>
+            <li>Développer un contrôleur robuste pour réduire l'impact des retards de communication et améliorer la résilience des turbines.</li>
+            <li>Valider expérimentalement sur un modèle de turbine T700 pour garantir la stabilité du système sous contraintes.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Commande robuste</span>
+            <span class="tag">H∞ / LMI</span>
+            <span class="tag">Matlab</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="competences">
+      <span class="eyebrow">Savoir-faire</span>
+      <h2>Compétences</h2>
+
+      <div class="skills-grid">
+        <div class="skills-group">
+          <h3>Techniques</h3>
+          <div class="skills-tags">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">C++</span>
+            <span class="skill-pill">Matlab</span>
+            <span class="skill-pill">Automatisation industrielle</span>
+            <span class="skill-pill">Systèmes SCADA / DCS</span>
+            <span class="skill-pill">Optimisation logistique</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <h3>Outils &amp; Logiciels</h3>
+          <div class="skills-tags">
+            <span class="skill-pill">GAMS Studio</span>
+            <span class="skill-pill">Super Decision</span>
+            <span class="skill-pill">SAP S/4HANA</span>
+            <span class="skill-pill">ERPsim</span>
+            <span class="skill-pill">Power BI</span>
+            <span class="skill-pill">Supply Chain Guru</span>
+            <span class="skill-pill">SolidWorks</span>
+            <span class="skill-pill">AutoCAD</span>
+            <span class="skill-pill">Simatic Step 7</span>
+            <span class="skill-pill">Office 365</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <h3>Certifications</h3>
+          <div class="skills-tags">
+            <span class="skill-pill">Gestion de projet et leadership</span>
+            <span class="skill-pill">Industrie 4.0</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <h3>Langues</h3>
+          <div class="skills-tags">
+            <span class="skill-pill">Français</span>
+            <span class="skill-pill">Anglais</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <h3>Compétences transversales</h3>
+          <div class="skills-tags">
+            <span class="skill-pill">Supervision d'équipe</span>
+            <span class="skill-pill">Leadership</span>
+            <span class="skill-pill">Gestion de projet</span>
+            <span class="skill-pill">Rigueur et documentation technique</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="formation">
+      <span class="eyebrow">Formation</span>
+      <h2>Éducation</h2>
+
+      <ul class="timeline">
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3>Maîtrise en génie de la production automatisée</h3>
+            <span class="dates">Mai 2026</span>
+          </div>
+          <div class="timeline-org">École de technologie supérieure (ÉTS)<span class="sep">·</span>Montréal, Canada</div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3>Diplôme de master en automatisation en industries pétrochimiques</h3>
+            <span class="dates">Juillet 2023</span>
+          </div>
+          <div class="timeline-org">Université 20 Août<span class="sep">·</span>Skikda, Algérie</div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3>Diplôme de licence en automatisation et contrôle en industries pétrochimiques</h3>
+            <span class="dates">Juillet 2021</span>
+          </div>
+          <div class="timeline-org">Université 20 Août<span class="sep">·</span>Skikda, Algérie</div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <span class="eyebrow">Contact</span>
+      <h2>Discutons</h2>
+      <div class="contact-row">
+        <a class="contact-btn primary" href="mailto:khoucha.tareknadhir@gmail.com">Envoyer un courriel</a>
+        <a class="contact-btn" href="https://www.linkedin.com/in/tarek-khoucha-eng-génie-production" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="contact-btn" href="tel:+14505172949">Appeler</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  Portfolio de Tarek Nadhir Khoucha — dernière mise à jour : août 2026
+</footer>
+
+</body>
+</html>
